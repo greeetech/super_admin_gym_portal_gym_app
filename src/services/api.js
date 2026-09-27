@@ -1,7 +1,9 @@
-import axios from 'axios';
+﻿import axios from 'axios';
+
+const base = (import.meta.env.VITE_ADMIN_API_URL || import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL || '').replace(/\/$/, '');
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_ADMIN_API_URL || '/admin',
+  baseURL: base ? (base.endsWith('/admin') ? base : `${base}/admin`) : (import.meta.env.VITE_ADMIN_API_URL || '/admin'),
   headers: {
     'Content-Type': 'application/json',
   },
